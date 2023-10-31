@@ -1,0 +1,80 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: green;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.road {
+    background-color: rgb(44, 43, 43);
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.whiteLine {
+    background-color: white;
+    height: 100%;
+    width: 1rem;
+}
+
+.dottedLine {
+    background-color: white;
+    height: 100%;    width: 1rem;
+}
+
+.dot {
+    height: 10%;
+    background-color: rgb(44, 43, 43);
+}
+
+
+ .dot-1 {
+    position: relative;
+    
+} 
+
+.dot-2 {
+    position: relative;
+
+}
+
+.dot-3 {
+    position: relative;
+}
+
+.dot-4 {
+    position: relative;
+    
+}
+
+.dot-5 {
+    position: relative;
+   
+}
+
+.dot-6 {
+    position: relative;
+    
+}
+
+#car {
+    position: relative;
+    bottom: -80px;
+    width: 70px;
+    height: 100px;
+    left: -27px;
+    background: linear-gradient(red, blue);
+    border-radius: 20px;
+}
+
+
+
+ 
