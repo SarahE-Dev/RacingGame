@@ -14,9 +14,10 @@ body {
 .road {
     background-color: rgb(44, 43, 43);
     width: 50vw;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: space-between;
+    overflow: hidden;
 }
 
 .whiteLine {
@@ -26,13 +27,13 @@ body {
 }
 
 .dottedLine {
-    background-color: white;
+    background-color: rgb(44, 43, 43);
     height: 100%;    width: 1rem;
 }
 
 .dot {
-    height: 10%;
-    background-color: rgb(44, 43, 43);
+    height: 40px;
+    background-color: white;
 }
 
 
@@ -65,14 +66,34 @@ body {
     
 }
 
-#car {
+.dot-7 {
     position: relative;
-    bottom: -80px;
+    
+}
+
+.dot-8 {
+    position: relative;
+    
+}
+
+.dot-9 {
+    position: relative;
+    
+}
+
+.dot-10 {
+    position: relative;
+    
+}
+
+#car {
+    position: absolute;
+    bottom: 0px;
     width: 70px;
     height: 100px;
-    left: -27px;
     background: linear-gradient(red, blue);
     border-radius: 20px;
+    transform: translateX(0px);
 }
 
 
