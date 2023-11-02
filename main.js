@@ -1,102 +1,115 @@
-const score=document.querySelector('.Score');
-const startscreen=document.querySelector('.StartScreen');
-const gamearea=document.querySelector('.GameArea');
-let player={ speed:5,score:0};
-let highest=0;
-startscreen.addEventListener('click',start);
+const score = document.querySelector('.Score');
+const startscreen = document.querySelector('.StartScreen');
+const gamearea = document.querySelector('.GameArea');
+let player = { 
+    speed: 4,
+    score: 0
+}
+let highest = 0;
+startscreen.addEventListener('click', start);
 
-let keys={ArrowUp: false, ArrowDown: false, ArrowRight: false, ArrowLeft: false};
+let keys = {
+    ArrowUp: false, 
+    ArrowDown: false, 
+    ArrowRight: false, 
+    ArrowLeft: false
+}
 
-document.addEventListener('keydown',keyDown);
-document.addEventListener('keyup',keyUp);
-function keyDown(ev){
-    ev.preventDefault();
-    keys[ev.key]=true;
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);
+function keyDown(e){
+    e.preventDefault();
+    keys[e.key] = true;
 
 }
-function keyUp(ev){
-    ev.preventDefault();
-    keys[ev.key]=false;
+function keyUp(e){
+    e.preventDefault();
+    keys[e.key] = false;
     
 }
 
 function isCollide(a,b){
-    aRect=a.getBoundingClientRect();
-    bRect=b.getBoundingClientRect();
+    aRect = a.getBoundingClientRect();
+    bRect = b.getBoundingClientRect();
 
     return !((aRect.bottom<bRect.top)||(aRect.top>bRect.bottom)||(aRect.right<bRect.left)||(aRect.left>bRect.right));
 }
 
 function moveLines(){
-    let lines=document.querySelectorAll('.lines');
+    let lines = document.querySelectorAll('.lines');
     lines.forEach(function(item){
-        if(item.y>=700){
-            item.y-=750;
+        if(item.y >= 700){
+            item.y -= 750;
         }
-        item.y+=player.speed;
-        item.style.top=item.y+'px';
+        item.y += player.speed;
+        item.style.top = item.y + 'px';
 
     })
 }
 
 function endGame(){
-    player.start=false;
+    player.start = false;
     startscreen.classList.remove('hide');
 }
 
 function moveCar(car){
-    let other=document.querySelectorAll('.other');
+    let other = document.querySelectorAll('.other');
     other.forEach(function(item){
-        if(isCollide(car,item)){
-            console.log('HIT');
-            endGame();
+        if(isCollide(car, item)){
+            // endGame()
+            loseLife()
         }
-        if(item.y>=750){
-            item.y=-300;
-            item.style.left=Math.floor(Math.random()*350) + 'px';
+        if(item.y >= 750){
+            item.y =- 300;
+            item.style.left = Math.floor(Math.random()*350) + 'px';
         }
-        item.y+=player.speed;
-        item.style.top=item.y+'px';
+        item.y += player.speed;
+        item.style.top = item.y+'px';
 
     })
 }
 
 function gamePlay(){
 
-    let car=document.querySelector('.car');
-    let road=gamearea.getBoundingClientRect();
+    let car = document.querySelector('.car');
+    let road = gamearea.getBoundingClientRect();
 
     if(player.start){
 
         moveLines();
         moveCar(car);
         if(keys.ArrowUp && player.y>(road.top+70)){
-            player.y-=player.speed;
+            player.y -= player.speed;
         }
-        if(keys.ArrowDown && player.y<(road.bottom-70)){
-            player.y+=player.speed;
+        if(keys.ArrowDown && player.y < (road.bottom-70)){
+            player.y += player.speed;
         }
-        if(keys.ArrowLeft && player.x>0){
-            player.x-=player.speed;
+        if(keys.ArrowLeft && player.x > 0){
+            player.x -= player.speed;
         }
-        if(keys.ArrowRight && player.x<(road.width-50)){
-            player.x+=player.speed;
+        if(keys.ArrowRight && player.x < (road.width-50)){
+            player.x += player.speed;
         }
 
-        car.style.top=player.y + 'px';
-        car.style.left=player.x + 'px';
+        car.style.top = player.y + 'px';
+        car.style.left = player.x + 'px';
 
         window.requestAnimationFrame(gamePlay);
         player.score++;
-        if(player.score>=highest)
+        if(player.score >= highest)
         {
-            highest=player.score;
+            highest = player.score;
         }
-        score.innerHTML="Your Score:"+ player.score+"<br><br>"+"Highest Score:"+highest;
+        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + "<span>❤️❤️❤️</span>";
+        ;
 
 
     }
     
+}
+
+function loseLife(){
+    console.log(document.querySelector('span').innerText);
 }
 
 function Reset(){
@@ -105,40 +118,40 @@ function Reset(){
 
 function start(){
     startscreen.classList.add('hide');
-    gamearea.innerHTML="";
+    gamearea.innerHTML = "";
 
-    player.start=true;
-    player.score=0;
+    player.start = true;
+    player.score = 0;
     window.requestAnimationFrame(gamePlay);
 
-   for(x=0;x<5;x++){
+   for(let x = 0; x < 5;x++){
         let roadline=document.createElement('div');
         roadline.setAttribute('class','lines');
-        roadline.y=(x*150);
-        roadline.style.top=roadline.y+'px';
+        roadline.y = (x*150);
+        roadline.style.top = roadline.y+'px';
         gamearea.appendChild(roadline);
     }
     
-    let car=document.createElement('div');
+    let car = document.createElement('div');
     car.setAttribute('class','car');
     gamearea.appendChild(car);
 
-    player.x=car.offsetLeft;
-    player.y=car.offsetTop;
+    player.x = car.offsetLeft;
+    player.y = car.offsetTop;
 
-    for(x=0;x<3;x++){
-        let othercar=document.createElement('div');
+    for(let x = 0;x < 3;x++){
+        let othercar = document.createElement('div');
         othercar.setAttribute('class','other');
-        othercar.y=((x+1)*350)* -1;
-        othercar.style.top=othercar.y+'px';
-        othercar.style.left=Math.floor(Math.random()*350) + 'px';
-        othercar.style.backgroundColor = 'rgba('+randomcolor()+','+randomcolor()+','+randomcolor()+')'
+        othercar.y = ((x+1)*350)* -1;
+        othercar.style.top = othercar.y + 'px';
+        othercar.style.left = Math.floor(Math.random()*350) + 'px';
+        othercar.style.backgroundColor = 'rgba('+ randomcolor() + ',' + randomcolor() + ','+ randomcolor() + ')'
         gamearea.appendChild(othercar);
     }
 }
 
 function randomcolor() {
-    return Math.floor(Math.random() * 255)+2;
+    return Math.floor(Math.random() * 255) + 2;
 }
 
 
