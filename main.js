@@ -1,6 +1,6 @@
-const score = document.querySelector('.Score');
-const startscreen = document.querySelector('.StartScreen');
-const gamearea = document.querySelector('.GameArea');
+const score = document.querySelector('.score');
+const startscreen = document.querySelector('.startScreen');
+const gamearea = document.querySelector('.gameArea');
 let player = { 
     speed: 4,
     score: 0
@@ -15,24 +15,37 @@ let keys = {
     ArrowLeft: false
 }
 
+let isInvincible = false;
+let lives = 3;
+
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
+
 function keyDown(e){
-    e.preventDefault();
     keys[e.key] = true;
 
 }
+
 function keyUp(e){
-    e.preventDefault();
     keys[e.key] = false;
     
 }
 
-function isCollide(a,b){
-    aRect = a.getBoundingClientRect();
-    bRect = b.getBoundingClientRect();
+function loseLife(){
+    isInvincible = true;
+    lives -=1;
+    setTimeout(()=>{
+        isInvincible = false;
+    }, 3000)
+    console.log(lives);
+    
+}
 
-    return !((aRect.bottom<bRect.top)||(aRect.top>bRect.bottom)||(aRect.right<bRect.left)||(aRect.left>bRect.right));
+function isCollide(one, two){
+    let oneRect = one.getBoundingClientRect();
+    let twoRect = two.getBoundingClientRect();
+
+    return !((oneRect.bottom < twoRect.top) || (oneRect.top > twoRect.bottom) || (oneRect.right < twoRect.left) || (oneRect.left > twoRect.right));
 }
 
 function moveLines(){
@@ -53,18 +66,21 @@ function endGame(){
 }
 
 function moveCar(car){
-    let other = document.querySelectorAll('.other');
-    other.forEach(function(item){
+    let obstacle = document.querySelectorAll('.obstacle');
+    obstacle.forEach(function(item){
         if(isCollide(car, item)){
-            // endGame()
             loseLife()
+            if(isInvincible === false && lives === 0){
+                endGame();
+            }
+            
         }
         if(item.y >= 750){
             item.y =- 300;
             item.style.left = Math.floor(Math.random()*350) + 'px';
         }
         item.y += player.speed;
-        item.style.top = item.y+'px';
+        item.style.top = item.y +'px';
 
     })
 }
@@ -78,16 +94,10 @@ function gamePlay(){
 
         moveLines();
         moveCar(car);
-        if(keys.ArrowUp && player.y>(road.top+70)){
-            player.y -= player.speed;
-        }
-        if(keys.ArrowDown && player.y < (road.bottom-70)){
-            player.y += player.speed;
-        }
         if(keys.ArrowLeft && player.x > 0){
             player.x -= player.speed;
         }
-        if(keys.ArrowRight && player.x < (road.width-50)){
+        if(keys.ArrowRight && player.x < (road.width - 50)){
             player.x += player.speed;
         }
 
@@ -100,7 +110,7 @@ function gamePlay(){
         {
             highest = player.score;
         }
-        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + "<span>❤️❤️❤️</span>";
+        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + "<span></span>";
         ;
 
 
@@ -108,9 +118,8 @@ function gamePlay(){
     
 }
 
-function loseLife(){
-    console.log(document.querySelector('span').innerText);
-}
+
+
 
 function Reset(){
     highest=0;
@@ -127,7 +136,7 @@ function start(){
    for(let x = 0; x < 5;x++){
         let roadline=document.createElement('div');
         roadline.setAttribute('class','lines');
-        roadline.y = (x*150);
+        roadline.y = (x * 150);
         roadline.style.top = roadline.y+'px';
         gamearea.appendChild(roadline);
     }
@@ -141,8 +150,8 @@ function start(){
 
     for(let x = 0;x < 3;x++){
         let othercar = document.createElement('div');
-        othercar.setAttribute('class','other');
-        othercar.y = ((x+1)*350)* -1;
+        othercar.setAttribute('class','obstacle');
+        othercar.y = ((x + 1)*350) * -1;
         othercar.style.top = othercar.y + 'px';
         othercar.style.left = Math.floor(Math.random()*350) + 'px';
         othercar.style.backgroundColor = 'rgba('+ randomcolor() + ',' + randomcolor() + ','+ randomcolor() + ')'

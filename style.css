@@ -17,7 +17,7 @@
     background-size: cover;
 }
 
-.GameArea{
+.gameArea{
     width: 400px;
     height: 100vh;
     background-color: rgb(29, 26, 26);
@@ -36,13 +36,13 @@
     margin-left: 195px;
 }
 
-.CarGame{
+.carGame{
     background-image: url(/grass.avif);
     background-size: cover;
 
 }
 
-.Score{
+.score{
     position: absolute;
     top: 15px;
     left: 50px;
@@ -57,7 +57,7 @@
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
 }
 
-.StartScreen{
+.startScreen{
     position: absolute;
     background-color: rgba(117, 8, 119, 0.952);
     color: white;
@@ -81,7 +81,7 @@ button{
     color: white;
 }
 
-.other {
+.obstacle {
     width: 50px;
     height: 70px;
     position: absolute;
