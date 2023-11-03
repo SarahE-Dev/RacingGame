@@ -185,7 +185,7 @@ function start(){
     let roadHeight = road.height;
     console.log(roadHeight);
 
-    for(let x = 0;x < 7;x++){
+    for(let x = 0;x < 3;x++){
         let othercar = document.createElement('div');
         othercar.setAttribute('class','obstacle');
         othercar.y = ((x + 1)*350) * -1;
