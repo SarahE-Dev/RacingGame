@@ -31,15 +31,7 @@ function keyUp(e){
     
 }
 
-function loseLife(){
-    isInvincible = true;
-    lives -=1;
-    setTimeout(()=>{
-        isInvincible = false;
-    }, 3000)
-    console.log(lives);
-    
-}
+
 
 function isCollide(one, two){
     let oneRect = one.getBoundingClientRect();
@@ -70,11 +62,12 @@ function moveCar(car){
     obstacle.forEach(function(item){
         if(isCollide(car, item)){
             loseLife()
-            if(isInvincible === false && lives === 0){
-                endGame();
-            }
+            
             
         }
+        // if(isInvincible === false && lives < 1){
+        //     endGame();
+        // }
         if(item.y >= 750){
             item.y =- 300;
             item.style.left = Math.floor(Math.random()*350) + 'px';
@@ -84,6 +77,10 @@ function moveCar(car){
 
     })
 }
+
+
+
+
 
 function gamePlay(){
 
@@ -97,7 +94,7 @@ function gamePlay(){
         if(keys.ArrowLeft && player.x > 0){
             player.x -= player.speed;
         }
-        if(keys.ArrowRight && player.x < (road.width - 50)){
+        if(keys.ArrowRight && player.x < road.width - 60){
             player.x += player.speed;
         }
 
@@ -110,13 +107,35 @@ function gamePlay(){
         {
             highest = player.score;
         }
-        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + "<span></span>";
+        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + `<span id="livesYouHave"></span>`;
         ;
+        setLives()
 
 
     }
     
 }
+
+function loseLife(){
+    document.querySelector('.car').classList.add("rotate")
+    isInvincible = true;
+    if(isInvincible === true){
+        lives-=1
+    }
+    setTimeout(()=>{
+        isInvincible = false;
+        document.querySelector('.car').classList.remove("rotate")
+        lives -= 1;
+    }, 2000)
+    console.log(lives);
+    
+}
+
+function setLives(){
+    $('#livesYouHave').text(lives)
+}
+
+
 
 
 
@@ -157,6 +176,7 @@ function start(){
         othercar.style.backgroundColor = 'rgba('+ randomcolor() + ',' + randomcolor() + ','+ randomcolor() + ')'
         gamearea.appendChild(othercar);
     }
+    
 }
 
 function randomcolor() {

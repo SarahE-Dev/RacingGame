@@ -18,7 +18,7 @@
 }
 
 .gameArea{
-    width: 400px;
+    width: 60%;
     height: 100vh;
     background-color: rgb(29, 26, 26);
     margin: auto;
@@ -33,7 +33,7 @@
     height: 70px;
     background: yellow;
     position: absolute;
-    margin-left: 195px;
+    margin-left: 50%;
 }
 
 .carGame{
@@ -45,14 +45,14 @@
 .score{
     position: absolute;
     top: 15px;
-    left: 50px;
+    left: 5%;
     text-align: center;
     padding-top: 23px;
     font-size: 30px;
     line-height: 20px;
     background-color: rgba(34, 119, 8, 0.952);
     color: white;
-    width: 300px;
+    width: 15%;
     height: 150px;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
 }
@@ -63,7 +63,7 @@
     color: white;
     z-index: 1;
     margin-top: 210px;
-    margin-left:360px;
+    margin-left: 25%;
     text-align: center;
     box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
     font-size: 1em;
@@ -87,4 +87,9 @@ button{
     position: absolute;
     bottom: 120px;
     background-size: cover;
+}
+
+.rotate {
+    rotate: 1turn;
+    transition: rotate 1s;
 }
