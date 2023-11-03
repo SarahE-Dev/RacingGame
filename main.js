@@ -65,9 +65,6 @@ function moveCar(car){
             
             
         }
-        // if(isInvincible === false && lives < 1){
-        //     endGame();
-        // }
         if(item.y >= 750){
             item.y =- 300;
             item.style.left = Math.floor(Math.random()*350) + 'px';
@@ -90,7 +87,9 @@ function gamePlay(){
     if(player.start){
 
         moveLines();
-        moveCar(car);
+        if(isInvincible === false){
+            moveCar(car);
+        }
         if(keys.ArrowLeft && player.x > 0){
             player.x -= player.speed;
         }
@@ -102,14 +101,16 @@ function gamePlay(){
         car.style.left = player.x + 'px';
 
         window.requestAnimationFrame(gamePlay);
-        player.score++;
+        if(isInvincible === false){
+            player.score++
+        }
         if(player.score >= highest)
         {
             highest = player.score;
         }
         score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + `<span id="livesYouHave"></span>`;
         ;
-        setLives()
+        livesHandler()
 
 
     }
@@ -125,18 +126,29 @@ function loseLife(){
     setTimeout(()=>{
         isInvincible = false;
         document.querySelector('.car').classList.remove("rotate")
-        lives -= 1;
     }, 2000)
     console.log(lives);
     
 }
 
-function setLives(){
-    $('#livesYouHave').text(lives)
+
+
+
+function livesHandler(){
+    let livesText = document.querySelector('#livesYouHave');
+    if(lives === 3){
+        livesText.innerText = "❤️❤️❤️"
+    }
+    if(lives === 2){
+        livesText.innerText = "🤍❤️❤️"
+    }
+    if(lives === 1){
+        livesText.innerText = "🤍🤍❤️"
+    }
+    if(lives < 1){
+        livesText.innerText = "🤍🤍🤍"
+    }
 }
-
-
-
 
 
 
@@ -167,12 +179,18 @@ function start(){
     player.x = car.offsetLeft;
     player.y = car.offsetTop;
 
-    for(let x = 0;x < 3;x++){
+    let road = gamearea.getBoundingClientRect()
+    let roadWidth = road.width
+    console.log(roadWidth);
+    let roadHeight = road.height;
+    console.log(roadHeight);
+
+    for(let x = 0;x < 7;x++){
         let othercar = document.createElement('div');
         othercar.setAttribute('class','obstacle');
         othercar.y = ((x + 1)*350) * -1;
         othercar.style.top = othercar.y + 'px';
-        othercar.style.left = Math.floor(Math.random()*350) + 'px';
+        othercar.style.left = Math.floor(Math.random()*Math.floor(roadWidth))+1 + 'px';
         othercar.style.backgroundColor = 'rgba('+ randomcolor() + ',' + randomcolor() + ','+ randomcolor() + ')'
         gamearea.appendChild(othercar);
     }
