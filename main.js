@@ -25,6 +25,9 @@ let keys = {
     ArrowLeft: false
 }
 
+let rightClicked = false;
+let leftClicked = false;
+
 let isInvincible = false;
 let lives = 0;
 
@@ -41,6 +44,22 @@ function keyDown(e){
 
 function keyUp(e){
     keys[e.key] = false;
+}
+
+function rightDown(){
+    rightClicked = true;
+}
+
+function rightUp(){
+    rightClicked = false;
+}
+
+function leftDown(){
+    leftClicked = true;
+}
+
+function leftUp(){
+    leftClicked = false;
 }
 
 // Checks for collision bewteen the arguments given, which will be the car and other obstacles/cars.

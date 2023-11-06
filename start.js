@@ -5,16 +5,24 @@ function start(){
     gamearea.innerHTML = "";
 
     $('.score').removeClass('hide');
-    let mobile = isMobile()
+
+    let mobile = isMobile();
+
     if(mobile === true){
         let html = `<div class="button">
-            <button style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
+            <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
         </div>
         <div class="button2">
-            <button style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
+            <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
         </div>`
-        $('.carGame').append(html)
+        $('.carGame').append(html);
+        document.querySelector('#right').addEventListener('mousedown', rightDown);
+        document.addEventListener('#right').addEventListener('mouseup', rightUp);
+        document.querySelector('#left').addEventListener('mousedown', leftDown)
+        document.addEventListener('#right').addEventListener('mouseup', leftUp)
     }
+
+
 
     player.start = true;
     player.score = 0;
@@ -39,7 +47,6 @@ function start(){
 
     let road = gamearea.getBoundingClientRect()
     let roadWidth = road.width
-    let roadHeight = road.height;
     
 
     for(let x = 0;x < 3;x++){
