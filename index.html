@@ -14,8 +14,20 @@
         <div class="score">
         </div>
         <div class="startScreen">
-            <p class="text-sm-center">Start Game by clicking Here<br><br>Use Arrow Keys to steer your car.<br><br>If you hit another car you will loose a life.</p>
-            <button class="" onclick="Reset()">Reset Highest Score</button>
+            <h6 class="text-sm-center">Start Game by clicking <span id="here">Here</span><br><br>Use Arrow Keys to steer your car.<br><br>If you hit another car you will loose a life.</p>
+            <div class="cont">
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose Difficulty
+                </button>
+                <ul id="difficulty" class="dropdown-menu">
+                  <li><a id="easy" class="dropdown-item" href="#">Easy</a></li>
+                  <li><a id="medium" class="dropdown-item" href="#">Medium</a></li>
+                  <li><a id="hard" class="dropdown-item" href="#">Hard</a></li>
+                </ul>
+              </div>
+            <button class="btn btn-success" onclick="Reset()">Reset High Score</button>
+        </div>
         </div>
         <div class="gameArea"></div>
     </div> 

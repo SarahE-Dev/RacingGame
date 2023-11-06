@@ -5,8 +5,12 @@ let player = {
     speed: 4,
     score: 0
 }
-let highest = 0;
-startscreen.addEventListener('click', start);
+
+let highest = localStorage.getItem('highest');
+if(highest === undefined){
+    highest = 0;
+}
+document.querySelector('#here').addEventListener('click', start);
 
 let keys = {
     ArrowUp: false, 
@@ -16,22 +20,20 @@ let keys = {
 }
 
 let isInvincible = false;
-let lives = 3;
+let lives = 0;
+
+$('.score').addClass('hide')
 
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
 function keyDown(e){
     keys[e.key] = true;
-
 }
 
 function keyUp(e){
     keys[e.key] = false;
-    
 }
-
-
 
 function isCollide(one, two){
     let oneRect = one.getBoundingClientRect();
@@ -62,8 +64,6 @@ function moveCar(car){
     obstacle.forEach(function(item){
         if(isCollide(car, item)){
             loseLife()
-            
-            
         }
         if(item.y >= 750){
             item.y =- 300;
@@ -108,7 +108,7 @@ function gamePlay(){
         {
             highest = player.score;
         }
-        score.innerHTML = "Your Score:" + player.score + "<br><br>" + "Highest Score:"+ highest  + "<br><br>" + "Lives: " + `<span id="livesYouHave"></span>`;
+        score.innerHTML = `<p id="your-score">Your Score: ${player.score}</p>` + `<p id="highest-score">Highest Score: ${highest}</p>` + `<p>Lives: <span id="livesYouHave"></span></p>`;
         ;
         livesHandler()
 
@@ -147,22 +147,41 @@ function livesHandler(){
     }
     if(lives < 1){
         livesText.innerText = "🤍🤍🤍"
+        localStorage.setItem('highest', highest)
+        endGame()
     }
 }
 
+$('#easy').on('click', ()=>{
+    player.speed = 4;
+})
+
+$('#medium').on('click', ()=>{
+    player.speed = 6.5;
+})
+
+$('#hard').on('click', ()=>{
+    player.speed = 9;
+})
 
 
 function Reset(){
-    highest=0;
+    localStorage.setItem('highest', 0);
+    highest = localStorage.getItem('highest')
+    $('#highest-score').text('Highest Score: 0')
 }
 
 function start(){
     startscreen.classList.add('hide');
     gamearea.innerHTML = "";
 
+    $('.score').removeClass('hide')
+
     player.start = true;
     player.score = 0;
     window.requestAnimationFrame(gamePlay);
+
+    lives = 3;
 
    for(let x = 0; x < 5;x++){
         let roadline=document.createElement('div');
@@ -185,20 +204,21 @@ function start(){
     let roadHeight = road.height;
     console.log(roadHeight);
 
-    for(let x = 0;x < 3;x++){
+    for(let x = 0;x < 4;x++){
         let othercar = document.createElement('div');
         othercar.setAttribute('class','obstacle');
-        othercar.y = ((x + 1)*350) * -1;
+        console.log(othercar.y);
+        othercar.y = ((x + 1)*250) * -1;
         othercar.style.top = othercar.y + 'px';
-        othercar.style.left = Math.floor(Math.random()*Math.floor(roadWidth))+1 + 'px';
-        othercar.style.backgroundColor = 'rgba('+ randomcolor() + ',' + randomcolor() + ','+ randomcolor() + ')'
+        othercar.style.left = Math.floor(Math.random()*Math.floor(roadWidth))+10 + 'px';
+        othercar.style.backgroundImage = `url(/obstacles/obstacle` + randomImage() +`.png)`
         gamearea.appendChild(othercar);
     }
     
 }
 
-function randomcolor() {
-    return Math.floor(Math.random() * 255) + 2;
+function randomImage() {
+    return Math.floor(Math.random() * 7) + 1;
 }
 
 
