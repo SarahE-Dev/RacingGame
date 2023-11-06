@@ -5,3 +5,5 @@ You get three lives to start and you use the arrow keys to move. If you hit anot
 The game keeps a high score that is stored in the localStorage at the end of each game. You are able to clear that score with the Reset button on the Start Screen, which will set the scorebox text back to 0 as well.
 
 At the start of each game you are also able to select a difficulty before clicking the start here button, which changes the speed of the game. If you do not select a difficulty you can still start the game, it will just be at a speed bewteen Easy and Medium.
+
+I also added a mobile check. If it's a mobile device, arrow buttons appear that you can steer with. The text description on the start screen also changes to say buttons instead of keys.

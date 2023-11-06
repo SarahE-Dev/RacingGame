@@ -19,6 +19,7 @@ if(!('highest' in localStorage)){
 document.querySelector('#here').addEventListener('click', ()=>{
     start();
     setArrows();
+    audioPlayer();
 });
 
 let keys = {
@@ -184,8 +185,15 @@ function isMobile() {
 let mobile = isMobile();
 
 if(mobile){
-    $('#keys-arrows').text('Buttons')
+    $('#keys-arrows').text('Left and Right Buttons')
 }
+
+function audioPlayer(){
+    let music = new Audio('09. Drivessover.mp3')
+    music.play()
+}
+
+
 
 
 
