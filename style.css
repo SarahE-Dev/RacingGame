@@ -15,7 +15,7 @@
     position: absolute;
     bottom: 120px;
     left: 50%;
-    background-image: url(/60-600823_car-png-top.png);
+    background-image: url(./car/60-600823_car-png-top.png);
     background-size: cover;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .carGame {
-    background-image: url(5c7472b8c776c96d5ec370e87a4ebf93.jpg);
+    background-image: url(/5c7472b8c776c96d5ec370e87a4ebf93.jpg);
     background-size: cover;
 
 }
