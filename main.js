@@ -16,7 +16,10 @@ if(!('highest' in localStorage)){
     highest = 0;
 }
 
-document.querySelector('#here').addEventListener('click', startAndMobileCheck);
+document.querySelector('#here').addEventListener('click', ()=>{
+    start();
+    setArrows();
+});
 
 let keys = {
     ArrowUp: false, 

@@ -1,6 +1,6 @@
 // Function called at game start, creates lines and car you drive, and styles the placement of obstacle cars and lines.
 
-function startAndMobileCheck(){
+
 
 function start(){
     startscreen.classList.add('hide');
@@ -62,7 +62,7 @@ function setArrows(){
         document.querySelector('#left').addEventListener('mousedown', leftDown)
         document.addEventListener('#right').addEventListener('mouseup', leftUp)
     }
-}
+
 
  if(mobile){
         let html = `<div class="button">
