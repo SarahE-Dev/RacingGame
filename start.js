@@ -60,7 +60,7 @@ function setArrows(){
         document.querySelector('#right').addEventListener('touchstart', rightDown);
         document.querySelector('#right').addEventListener('touchend', rightUp);
         document.querySelector('#left').addEventListener('touchstart', leftDown);
-        document.querySelector('#right').addEventListener('touchend', leftUp);
+        document.querySelector('#left').addEventListener('touchend', leftUp);
 
         
     }
