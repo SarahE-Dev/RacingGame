@@ -5,8 +5,8 @@ function start(){
     gamearea.innerHTML = "";
 
     $('.score').removeClass('hide');
-
-    if(isMobile === true){
+    let mobile = isMobile()
+    if(mobile === true){
         let html = `<div class="button">
             <button style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
         </div>
