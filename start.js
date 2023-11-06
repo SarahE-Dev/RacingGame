@@ -1,29 +1,17 @@
 // Function called at game start, creates lines and car you drive, and styles the placement of obstacle cars and lines.
 
+function startAndMobileCheck(){
+
 function start(){
     startscreen.classList.add('hide');
     gamearea.innerHTML = "";
 
     $('.score').removeClass('hide');
 
-    if(mobile){
-        let html = `<div class="button">
-            <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
-        </div>
-        <div class="button2">
-            <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
-        </div>`;
-        $('.carGame').append(html);
-        document.querySelector('#right').addEventListener('mousedown', rightDown);
-        document.addEventListener('#right').addEventListener('mouseup', rightUp);
-        document.querySelector('#left').addEventListener('mousedown', leftDown)
-        document.addEventListener('#right').addEventListener('mouseup', leftUp)
-    }
-
-
-
     player.start = true;
     player.score = 0;
+    
+   
     window.requestAnimationFrame(gamePlay);
 
     lives = 3;
@@ -58,6 +46,38 @@ function start(){
         gamearea.appendChild(othercar);
     }
     
+}
+
+function setArrows(){
+    if(mobile){
+        let html = `<div class="button">
+            <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
+        </div>
+        <div class="button2">
+            <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
+        </div>`;
+        $('.carGame').append(html);
+        document.querySelector('#right').addEventListener('mousedown', rightDown);
+        document.addEventListener('#right').addEventListener('mouseup', rightUp);
+        document.querySelector('#left').addEventListener('mousedown', leftDown)
+        document.addEventListener('#right').addEventListener('mouseup', leftUp)
+    }
+}
+
+ if(mobile){
+        let html = `<div class="button">
+            <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
+        </div>
+        <div class="button2">
+            <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
+        </div>`;
+        $('.carGame').append(html);
+        document.querySelector('#right').addEventListener('mousedown', rightDown);
+        document.addEventListener('#right').addEventListener('mouseup', rightUp);
+        document.querySelector('#left').addEventListener('mousedown', leftDown)
+        document.addEventListener('#right').addEventListener('mouseup', leftUp)
+    }
+
 }
 
 // Funtion to choose a random number to add to file path to style the url of the obstacle car image.
