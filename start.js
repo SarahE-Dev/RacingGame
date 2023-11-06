@@ -6,7 +6,7 @@ function start(){
 
     $('.score').removeClass('hide');
 
-    if(mobile === true){
+    if(mobile){
         let html = `<div class="button">
             <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
         </div>

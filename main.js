@@ -172,6 +172,8 @@ function Reset(){
     $('#your-score').text('Your Score: 0')
 }
 
+// check for mobile device.
+
 function isMobile() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
