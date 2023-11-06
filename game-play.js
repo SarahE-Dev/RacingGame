@@ -17,10 +17,10 @@ function gamePlay(){
             moveCar(car)
         }
         
-        if(keys.ArrowLeft && player.x > 0 || leftClicked && player.x > 0){
+        if((keys.ArrowLeft && player.x > 0) || (leftClicked && player.x > 0)){
             player.x -= player.speed;
         }
-        if(keys.ArrowRight && player.x < road.width - thisCar.width || rightClicked && player.x < road.width - thisCar.width){
+        if((keys.ArrowRight && player.x < road.width - thisCar.width) || (rightClicked && player.x < road.width - thisCar.width)){
             player.x += player.speed;
         }
 
