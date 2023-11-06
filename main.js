@@ -16,11 +16,12 @@ if(!('highest' in localStorage)){
     highest = 0;
 }
 
+
+
 document.querySelector('#here').addEventListener('click', ()=>{
     start();
     setArrows();
     audioPlayer();
-    pauseGame();
 });
 
 let keys = {
@@ -37,6 +38,8 @@ let leftClicked = false;
 
 let isInvincible = false;
 let lives = 0;
+
+let musicPlaying = false;
 
 $('.score').addClass('hide')
 
@@ -192,18 +195,29 @@ if(mobile){
 }
 
 function audioPlayer(){
-    let music = new Audio('Cake - The Distance.mp3')
-    music.play();
+    
     let html = `<div class="pause-mute">
     <button id="pause" class="btn btn-light btn-outline-primary">Pause</button>
     <button id="restart" class="btn btn-light btn-outline-primary">Restart</button>
     <button id="mute" class="btn btn-light btn-outline-primary">Mute</button>
     </div>`;
     $('.carGame').append(html)
+    if(!musicPlaying){
+        playMusic();
+    }
+    pauseGame();
+
+}
+
+
+
+function playMusic(){
+    musicPlaying = true;
+    let music = new Audio('Cake - The Distance.mp3')
+    music.play()
     $('#mute').on('click', ()=>{
         music.pause()
     })
-
 }
 
 function pauseGame(){
@@ -213,6 +227,7 @@ function pauseGame(){
     $('#restart').on('click', ()=>{
         isPaused = false;
     })
+    
 }
 
 
