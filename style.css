@@ -66,11 +66,11 @@
     background-color: rgba(117, 8, 119, 0.952);
     color: white;
     z-index: 1;
-    top: 15%;
+    top: 5%;
     left: 25%;
     width: 50%;
     text-align: center;
-    font-size: 2.5vw;
+    font-size: 2.25vw;
     cursor: pointer;
     border-radius: 23px;
     padding: 5%;
@@ -83,7 +83,6 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    font-size: 2cqwh;
 }
 
 .obstacle {
@@ -103,13 +102,31 @@
 
 
 #here {
-    color: navy;
+    color: blueviolet;
     font-weight: bold;
-    text-shadow: 1px .5px .5px gray;
+    text-shadow: 1px .5px .5px navy;
 }
 
 #here:hover {
     color: yellow;
+}
+
+.dropdown, #reset {
+    font-size: 2vw;
+    padding: 10px;
+}
+
+
+#diff-btn {
+    font-size: 2vw;
+}
+
+li {
+    font-size: 2vw;
+}
+
+#easy:hover, #medium:hover, #hard:hover {
+    background-color: blueviolet;
 }
 
 
