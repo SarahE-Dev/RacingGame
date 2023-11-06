@@ -2,7 +2,7 @@ const score = document.querySelector('.score');
 const startscreen = document.querySelector('.startScreen');
 const gamearea = document.querySelector('.gameArea');
 let player = { 
-    speed: 4,
+    speed: 5,
     score: 0
 }
 
@@ -84,21 +84,28 @@ function gamePlay(){
     let car = document.querySelector('.car');
     let road = gamearea.getBoundingClientRect();
 
+    let thisCar = car.getBoundingClientRect();
+
     if(player.start){
 
         moveLines();
+        
         if(isInvincible === false){
-            moveCar(car);
+            moveCar(car)
         }
+        
         if(keys.ArrowLeft && player.x > 0){
             player.x -= player.speed;
         }
-        if(keys.ArrowRight && player.x < road.width - 60){
+        if(keys.ArrowRight && player.x < road.width - thisCar.width){
             player.x += player.speed;
         }
 
+
         car.style.top = player.y + 'px';
         car.style.left = player.x + 'px';
+
+        
 
         window.requestAnimationFrame(gamePlay);
         if(isInvincible === false){
@@ -127,7 +134,6 @@ function loseLife(){
         isInvincible = false;
         document.querySelector('.car').classList.remove("rotate")
     }, 2000)
-    console.log(lives);
     
 }
 
@@ -184,15 +190,15 @@ function start(){
     lives = 3;
 
    for(let x = 0; x < 5;x++){
-        let roadline=document.createElement('div');
-        roadline.setAttribute('class','lines');
+        let roadline = document.createElement('div');
+        roadline.classList.add('lines')
         roadline.y = (x * 150);
         roadline.style.top = roadline.y+'px';
         gamearea.appendChild(roadline);
     }
     
     let car = document.createElement('div');
-    car.setAttribute('class','car');
+    car.classList.add('car');
     gamearea.appendChild(car);
 
     player.x = car.offsetLeft;
@@ -200,17 +206,16 @@ function start(){
 
     let road = gamearea.getBoundingClientRect()
     let roadWidth = road.width
-    console.log(roadWidth);
     let roadHeight = road.height;
-    console.log(roadHeight);
+    
 
     for(let x = 0;x < 4;x++){
         let othercar = document.createElement('div');
-        othercar.setAttribute('class','obstacle');
-        console.log(othercar.y);
+        othercar.classList.add('obstacle')
         othercar.y = ((x + 1)*250) * -1;
         othercar.style.top = othercar.y + 'px';
-        othercar.style.left = Math.floor(Math.random()*Math.floor(roadWidth))+10 + 'px';
+        othercar.style.left = Math.floor(Math.random()*(roadWidth)) + 'px';
+        
         othercar.style.backgroundImage = `url(/obstacles/obstacle` + randomImage() +`.png)`
         gamearea.appendChild(othercar);
     }
