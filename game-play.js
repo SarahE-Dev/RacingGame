@@ -25,16 +25,12 @@ function gamePlay(){
         }
 
         if(mobile){
-            document.querySelector('#right').addEventListener('click', ()=>{
-                if(player.x < road.width - thisCar.width){
-                    player.x += player.speed;
-                }
-            });
-            document.querySelector('#left').addEventListener('click', ()=>{
-                if(player.x > 0){
-                    player.x -= player.speed;
-                }
-            })
+            if(leftClicked && player.x > 0){
+                player.x -= player.speed;
+            }
+            if(rightClicked && player.x < road.width - thisCar.width){
+                player.x += player.speed;
+            }
         }
 
 

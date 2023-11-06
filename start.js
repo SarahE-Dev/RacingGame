@@ -57,6 +57,11 @@ function setArrows(){
             <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
         </div>`;
         $('.carGame').append(html);
+        document.querySelector('#right').addEventListener('touchstart', rightDown);
+        document.querySelector('#right').addEventListener('touchend', rightUp);
+        document.querySelector('#left').addEventListener('touchstart', leftDown);
+        document.querySelector('#right').addEventListener('touchend', leftUp);
+
         
     }
 
@@ -68,3 +73,4 @@ function setArrows(){
 function randomImage() {
     return Math.floor(Math.random() * 7) + 1;
 }
+
