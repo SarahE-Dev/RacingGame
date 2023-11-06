@@ -19,7 +19,8 @@ if(!('highest' in localStorage)){
 document.querySelector('#here').addEventListener('click', ()=>{
     start();
     setArrows();
-    // audioPlayer();
+    audioPlayer();
+    pauseGame();
 });
 
 let keys = {
@@ -28,6 +29,8 @@ let keys = {
     ArrowRight: false, 
     ArrowLeft: false
 }
+
+let isPaused = false;
 
 let rightClicked = false;
 let leftClicked = false;
@@ -188,10 +191,31 @@ if(mobile){
     $('#keys-arrows').text('Left and Right Buttons')
 }
 
-// function audioPlayer(){
-//     let music = new Audio('09. Drivessover.mp3')
-//     music.play()
-// }
+function audioPlayer(){
+    let music = new Audio('Cake - The Distance.mp3')
+    music.play();
+    let html = `<div class="pause-mute">
+    <button id="pause" class="btn btn-light btn-outline-primary">Pause</button>
+    <button id="restart" class="btn btn-light btn-outline-primary">Restart</button>
+    <button id="mute" class="btn btn-light btn-outline-primary">Mute</button>
+    </div>`;
+    $('.carGame').append(html)
+    $('#mute').on('click', ()=>{
+        music.pause()
+    })
+
+}
+
+function pauseGame(){
+    $('#pause').on('click', ()=>{
+        isPaused = true;
+    })
+    $('#restart').on('click', ()=>{
+        isPaused = false;
+    })
+}
+
+
 
 
 

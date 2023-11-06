@@ -11,9 +11,10 @@ function gamePlay(){
 
     if(player.start){
 
-        moveLines();
-        
-        if(isInvincible === false){
+        if(isPaused === false){
+            moveLines();
+        }
+        if(isInvincible === false && isPaused === false){
             moveCar(car)
         }
         
@@ -38,7 +39,7 @@ function gamePlay(){
         car.style.left = player.x + 'px';
 
         window.requestAnimationFrame(gamePlay);
-        if(isInvincible === false){
+        if(isInvincible === false && isPaused === false){
             player.score++
         }
         if(player.score >= highest)

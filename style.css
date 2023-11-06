@@ -60,6 +60,7 @@
     top: 70%;
     height: fit-content;
     padding-top: 15px;
+    border-radius: 15px;
 }
 
 .startScreen {
@@ -142,6 +143,27 @@ li {
     right: 10vw;
     top: 30vw;
     width: 15vw;
+}
+
+.pause-mute {
+    display: flex;
+    flex-direction: column;
+    width: 15vw;
+    justify-content: space-between;
+    height: 25vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#pause, #mute, #restart {
+    font-size: 3vw;
+    border-radius: 20px;
+    
+}
+
+#pause {
+    margin-top: 2vw;
 }
 
 
