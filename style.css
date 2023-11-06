@@ -133,14 +133,14 @@ li {
 
 .button {
     position: absolute;
-    left: 10vw;
+    left: 12vw;
     top: 17vw;
     width: 15vw;
 }
 
 .button2 {
     position: absolute;
-    right: 10vw;
+    right: 12vw;
     top: 17vw;
     width: 15vw;
 }
@@ -157,7 +157,7 @@ li {
 }
 
 #pause, #mute, #restart {
-    font-size: 3vw;
+    font-size: 2vw;
     border-radius: 20px;
     
 }
