@@ -133,15 +133,15 @@ li {
 
 .button {
     position: absolute;
-    left: 12vw;
-    top: 17vw;
+    left: 15vw;
+    top: 20vw;
     width: 15vw;
 }
 
 .button2 {
     position: absolute;
-    right: 12vw;
-    top: 17vw;
+    right: 15vw;
+    top: 20vw;
     width: 15vw;
 }
 
