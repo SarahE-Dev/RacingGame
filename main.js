@@ -1,15 +1,21 @@
 const score = document.querySelector('.score');
 const startscreen = document.querySelector('.startScreen');
 const gamearea = document.querySelector('.gameArea');
+
+// Sets beginning score and speed if one is not chosen.
+
 let player = { 
     speed: 5,
     score: 0
 }
 
+// Sets high score and sets it as zero if no high score is in localStorage yet.
+
 let highest = localStorage.getItem('highest');
-if(highest === undefined){
+if(!('highest' in localStorage)){
     highest = 0;
 }
+
 document.querySelector('#here').addEventListener('click', start);
 
 let keys = {
@@ -24,6 +30,8 @@ let lives = 0;
 
 $('.score').addClass('hide')
 
+// Event listeners for key presses.
+
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
 
@@ -35,12 +43,16 @@ function keyUp(e){
     keys[e.key] = false;
 }
 
+// Checks for collision bewteen the arguments given, which will be the car and other obstacles/cars.
+
 function isCollide(one, two){
     let oneRect = one.getBoundingClientRect();
     let twoRect = two.getBoundingClientRect();
 
     return !((oneRect.bottom < twoRect.top) || (oneRect.top > twoRect.bottom) || (oneRect.right < twoRect.left) || (oneRect.left > twoRect.right));
 }
+
+// Function to move the lines.
 
 function moveLines(){
     let lines = document.querySelectorAll('.lines');
@@ -54,10 +66,14 @@ function moveLines(){
     })
 }
 
+// Function to end game when out of lives.
+
 function endGame(){
     player.start = false;
     startscreen.classList.remove('hide');
 }
+
+// Function to move the cars.
 
 function moveCar(car){
     let obstacle = document.querySelectorAll('.obstacle');
@@ -76,7 +92,8 @@ function moveCar(car){
 }
 
 
-
+// Function to put the other functions in and recall within itself with requestAnimationFrame.
+// Also where the ability to move the car with the arrow keys is, as well as where the score is created.
 
 
 function gamePlay(){
@@ -105,8 +122,6 @@ function gamePlay(){
         car.style.top = player.y + 'px';
         car.style.left = player.x + 'px';
 
-        
-
         window.requestAnimationFrame(gamePlay);
         if(isInvincible === false){
             player.score++
@@ -118,12 +133,11 @@ function gamePlay(){
         score.innerHTML = `<p id="your-score">Your Score: ${player.score}</p>` + `<p id="highest-score">Highest Score: ${highest}</p>` + `<p>Lives: <span id="livesYouHave"></span></p>`;
         ;
         livesHandler()
-
-
-
     }
     
 }
+
+// function to call when the check for collision proves to be true.
 
 function loseLife(){
     document.querySelector('.car').classList.add("rotate")
@@ -139,7 +153,7 @@ function loseLife(){
 }
 
 
-
+// Checks the amount of lives. Is called at the end each animation frame.
 
 function livesHandler(){
     let livesText = document.querySelector('#livesYouHave');
@@ -159,6 +173,8 @@ function livesHandler(){
     }
 }
 
+// Ability to change speed from the dropdown menu on start screen.
+
 $('#easy').on('click', ()=>{
     player.speed = 4;
 })
@@ -171,12 +187,15 @@ $('#hard').on('click', ()=>{
     player.speed = 9;
 })
 
+// Function for the reset button.
 
 function Reset(){
     localStorage.setItem('highest', 0);
     highest = localStorage.getItem('highest')
     $('#highest-score').text('Highest Score: 0')
 }
+
+// Function called at game start, creates lines and car you drive, and styles the placement of obstacle cars and lines.
 
 function start(){
     startscreen.classList.add('hide');
@@ -210,10 +229,10 @@ function start(){
     let roadHeight = road.height;
     
 
-    for(let x = 0;x < 4;x++){
+    for(let x = 0;x < 3;x++){
         let othercar = document.createElement('div');
         othercar.classList.add('obstacle')
-        othercar.y = ((x + 1)*250) * -1;
+        othercar.y = ((x + 1)*350) * -1;
         othercar.style.top = othercar.y + 'px';
         othercar.style.left = Math.floor(Math.random()*(roadWidth)) + 'px';
         
@@ -222,6 +241,8 @@ function start(){
     }
     
 }
+
+// Funtion to choose a random number to add to file path to style the url of the obstacle car image.
 
 function randomImage() {
     return Math.floor(Math.random() * 7) + 1;
