@@ -130,5 +130,19 @@ li {
     background-color: blueviolet;
 }
 
+.button {
+    position: absolute;
+    left: 10vw;
+    top: 40vw;
+}
+
+.button2 {
+    position: absolute;
+    right: 10vw;
+    top: 40vw;
+}
+
+
+
 
 

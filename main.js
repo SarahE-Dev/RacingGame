@@ -92,50 +92,7 @@ function moveCar(car){
 }
 
 
-// Function to put the other functions in and recall within itself with requestAnimationFrame.
-// Also where the ability to move the car with the arrow keys is, as well as where the score is created.
 
-
-function gamePlay(){
-
-    let car = document.querySelector('.car');
-    let road = gamearea.getBoundingClientRect();
-
-    let thisCar = car.getBoundingClientRect();
-
-    if(player.start){
-
-        moveLines();
-        
-        if(isInvincible === false){
-            moveCar(car)
-        }
-        
-        if(keys.ArrowLeft && player.x > 0){
-            player.x -= player.speed;
-        }
-        if(keys.ArrowRight && player.x < road.width - thisCar.width){
-            player.x += player.speed;
-        }
-
-
-        car.style.top = player.y + 'px';
-        car.style.left = player.x + 'px';
-
-        window.requestAnimationFrame(gamePlay);
-        if(isInvincible === false){
-            player.score++
-        }
-        if(player.score >= highest)
-        {
-            highest = player.score;
-        }
-        score.innerHTML = `<p id="your-score">Your Score: ${player.score}</p>` + `<p id="highest-score">Highest Score: ${highest}</p>` + `<p>Lives: <span id="livesYouHave"></span></p>`;
-        ;
-        livesHandler()
-    }
-    
-}
 
 // function to call when the check for collision proves to be true.
 
@@ -193,60 +150,13 @@ function Reset(){
     localStorage.setItem('highest', 0);
     highest = localStorage.getItem('highest')
     $('#highest-score').text('Highest Score: 0')
+    $('#your-score').text('Your Score: 0')
 }
 
-// Function called at game start, creates lines and car you drive, and styles the placement of obstacle cars and lines.
+const isMobile = () => /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-function start(){
-    startscreen.classList.add('hide');
-    gamearea.innerHTML = "";
 
-    $('.score').removeClass('hide')
 
-    player.start = true;
-    player.score = 0;
-    window.requestAnimationFrame(gamePlay);
-
-    lives = 3;
-
-   for(let x = 0; x < 5;x++){
-        let roadline = document.createElement('div');
-        roadline.classList.add('lines')
-        roadline.y = (x * 150);
-        roadline.style.top = roadline.y+'px';
-        gamearea.appendChild(roadline);
-    }
-    
-    let car = document.createElement('div');
-    car.classList.add('car');
-    gamearea.appendChild(car);
-
-    player.x = car.offsetLeft;
-    player.y = car.offsetTop;
-
-    let road = gamearea.getBoundingClientRect()
-    let roadWidth = road.width
-    let roadHeight = road.height;
-    
-
-    for(let x = 0;x < 3;x++){
-        let othercar = document.createElement('div');
-        othercar.classList.add('obstacle')
-        othercar.y = ((x + 1)*350) * -1;
-        othercar.style.top = othercar.y + 'px';
-        othercar.style.left = Math.floor(Math.random()*(roadWidth)) + 'px';
-        
-        othercar.style.backgroundImage = `url(./obstacles/obstacle` + randomImage() +`.png)`
-        gamearea.appendChild(othercar);
-    }
-    
-}
-
-// Funtion to choose a random number to add to file path to style the url of the obstacle car image.
-
-function randomImage() {
-    return Math.floor(Math.random() * 7) + 1;
-}
 
 
 
