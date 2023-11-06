@@ -6,15 +6,13 @@ function start(){
 
     $('.score').removeClass('hide');
 
-    let mobile = isMobile();
-
     if(mobile === true){
         let html = `<div class="button">
             <button id="left" style="width: 15vw; font-size: 2.5vw;" class="btn btn-primary">Left</button>
         </div>
         <div class="button2">
             <button id="right" style="width: 15vw; font-size: 2.5vw;"  class="btn btn-primary">Right</button>
-        </div>`
+        </div>`;
         $('.carGame').append(html);
         document.querySelector('#right').addEventListener('mousedown', rightDown);
         document.addEventListener('#right').addEventListener('mouseup', rightUp);
