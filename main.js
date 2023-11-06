@@ -216,7 +216,7 @@ function start(){
         othercar.style.top = othercar.y + 'px';
         othercar.style.left = Math.floor(Math.random()*(roadWidth)) + 'px';
         
-        othercar.style.backgroundImage = `url(/obstacles/obstacle` + randomImage() +`.png)`
+        othercar.style.backgroundImage = `url(./obstacles/obstacle` + randomImage() +`.png)`
         gamearea.appendChild(othercar);
     }
     
